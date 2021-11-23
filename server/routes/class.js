@@ -26,24 +26,13 @@ router.post('/class-register', authTeacher, (req,res)=> {
     })
 })
 
-router.post('/class-event-add', (req,res) => {
-    // res.status(200)
-    Class.findOneAndUpdate({teacherId: req.cookies.teacherId}, {slotStartTime: req.body.StartTime ? req.body.StartTime : "", 
+router.post('/class-event-add', authTeacher, (req,res) => {
+    Class.findOneAndUpdate({teacherId: req.body.teacherId}, {slotStartTime: req.body.StartTime ? req.body.StartTime : "", 
         slotEndTime: req.body.EndTime ? req.body.EndTime : "", 
         slotRecurrenceRelation: req.body.RecurrenceRule ? req.body.RecurrenceRule : "",
         slotSubject: req.body.Subject ? req.body.Subject: ""})
         .exec((err, doc) => {
         if(err) return res.status(400).send(err)
-        res.status(200)
-    })
-
-})
-
-router.get('/class-event', (req, res) => {
-    Class.findOne({teacherId: req.cookies.teacherId})
-        .exec((err, doc) => {
-        if(err) return res.status(400).send(err)
-        console.log(doc)
         res.status(200).json({
             classEvent: doc
         })
@@ -51,32 +40,37 @@ router.get('/class-event', (req, res) => {
 
 })
 
-router.post('/invite-student', (req,res) => {
+router.post('/invite-student', authTeacher, (req, res) => {
     Student.findOne({'email':req.body.email}, (err, student) => {
+        if(err) return res.json({ auth: false});
         if(!student) return res.json({
             auth: false,
             message: 'Auth failed, email not found'
         });
-    })
-    
-    Class.findOne({teacherId: req.cookies.teacherId})
+
+        Class.findOne({teacherId: req.cookies.teacherId})
         .exec((err, doc) => {
-        if(err) return res.status(400).send(err)
-        console.log(doc)
-        const subject = doc;
-        curr_students = subject.students ?  subject.students : []
+            if(err) return res.status(400).send(err)
+            console.log(doc)
+            const classID = doc._id;
 
-        subject.update({students: curr_students.push(req.body.email)})
+            Student.updateOne({'email':req.body.email}, {$push: {subjects: classID}}).exec((err, doc) => {
+                if(err) return res.status(400).send(err)
+            })
+
+            Class.updateOne({teacherId: req.body.teacherId}, 
+                {$push: {students: req.body.email}})
+                .exec((err, doc) => {
+                if(err) return res.status(400).send(err)
+                res.status(200).json({
+                    auth: true
+                })
+            })
+        })
+
+        
     })
-
-    // Class.findOneAndUpdate({teacherId: req.cookies.teacherId}, 
-    //     {students: req.body.email})
-    //     .exec((err, doc) => {
-    //     if(err) return res.status(400).send(err)
-    //     res.status(200)
-    // })
-
-})
+});
 
 
 module.exports = router;

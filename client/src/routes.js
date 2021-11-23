@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Switch, BrowserRouter, Route} from 'react-router-dom';
 import Admin from './components/admin';
 import Home from './components/home';
+import ClassesDashboard from './components/student/classesDashboard';
 import LoginStudent from './components/student/loginStudent';
 import SignupStudent from './components/student/signupStudent';
 import ClassRegister from './components/teacher/classRegister';
@@ -20,11 +21,11 @@ class RoutesComp extends Component {
               <Route path = "/invite-students" component = {StudentInvitation}/>
               <Route path = "/teacher-dashboard" component = {Dashboard}/>
               <Route path = "/class-register" component = {ClassRegister}/>
-              <Route path = "/teacher-signup" component = {AuthTeacher(SignupTeacher, false)}/>
+              <Route path = "/teacher-signup" component = {AuthTeacher(SignupTeacher)}/>
               <Route path = "/teacher-login" component = {AuthTeacher(LoginTeacher, false)}/>
               <Route path = "/student-signup" component = {AuthStudent(SignupStudent, false)}/>
               <Route path = "/student-login" component = {AuthStudent(LoginStudent, false)}/>
-              <Route path = "/admin" component = {AuthStudent(Admin, true)}/>
+              <Route path = "/classes-dashboard" component = {AuthStudent(ClassesDashboard, true)}/>
               <Route path = "/" component = {Home}/>
           </Switch>
         </BrowserRouter>

@@ -45,6 +45,7 @@ class StudentInvitation extends Component{
                     validationSchema={InviteSchema}
                     onSubmit = {values => {
                         this.props.dispatch(inviteStudent(values)).then(response => {
+                            console.log(values.email)
                             if(!this.props.classSub.auth){
                                 this.setState({
                                     validation: true

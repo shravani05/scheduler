@@ -6,45 +6,15 @@ import { connect } from 'react-redux';
 
 class Dashboard extends Component{
 
-    // state = {
-    //     data: [{
-    //         Id: 2,
-    //         Subject: 'Paris',
-    //         StartTime: new Date(2021, 10, 20, 10, 0),
-    //         EndTime: new Date(2021, 10, 20, 12, 30),
-    //         IsAllDay: false,
-    //         RecurrenceRule: 'FREQ=DAILY;INTERVAL=1;COUNT=5'
-    //     }]
-    // } eventSettings={{ dataSource: this.state.data }}
-
     state = {
-        data: [{
-                Subject: "Blah",
-                StartTime: "2021-11-24T07:00:00.000Z",
-                EndTime: "2021-11-24T07:30:00.000Z",
-                RecurrenceRule: 'FREQ=DAILY;INTERVAL=1;COUNT=5'
-                }],
         success: false
     }
 
-    componentDidMount(){
-        this.props.dispatch(getEventClass()).then(response => {
-            let event = response.payload.classEvent;
-            this.setState({
-                data:[{
-                    Subject: event.slotSubject,
-                    StartTime: event.slotStartTime,
-                    EndTime: event.slotEndTime,
-                    RecurrenceRule: event.slotRecurrenceRelation
-                }]
-            })
-        })
-    }
-
     componentDidUpdate(){
-        
         if(this.state.success){
             console.log("success");
+            alert("Class scheduled successfully. Move ahead to invite students.")
+            this.props.history.push('/invite-students')
         }
     }
 
@@ -55,9 +25,12 @@ class Dashboard extends Component{
         console.log(event)
 
         this.props.dispatch(addEventClass(event[0])).then(response => {
+            let newEvent = response.payload.classEvent;
+            console.log(newEvent.slotSubject)
             this.setState({
-                success: true
+                success: newEvent.slotSubject === "" ? true : false
             })
+            
         })
     }
 
@@ -65,7 +38,7 @@ class Dashboard extends Component{
         return(
             <>
                 <ScheduleComponent height='550px' ref={t => this.scheduleObj = t}  
-                dataBound={this.onDataBound.bind(this)} eventSettings={{ dataSource: this.state.data }}>
+                dataBound={this.onDataBound.bind(this)} >
                     <Inject services={[Day, Week, WorkWeek, Month, Agenda]}/>
                 </ScheduleComponent>;
                 <Link to="/invite-students">Go to Invite Students</Link>

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const Schema = mongoose.Schema;
 // const config = require('./../config/config').get(process.env.NODE_ENV);
 const SALT_I = 10;
 
@@ -26,7 +27,11 @@ const studentSchema = mongoose.Schema({
     },
     token:{
         type: String
-    }
+    },
+    subjects:[{
+        type: Schema.Types.ObjectId,
+        ref: 'Class'
+    }]
 });
 
 studentSchema.pre('save', function(next){

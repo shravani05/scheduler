@@ -8,7 +8,7 @@ const student = require('./routes/student');
 const teacher = require('./routes/teacher');
 const classSub = require('./routes/class');
 
-const MONGO_URI = require('./config')
+const MONGO_URI = 'mongodb+srv://admin:testing123@cluster0.8qyyd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 
 mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,

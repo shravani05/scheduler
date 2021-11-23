@@ -2,7 +2,6 @@ import axios from 'axios';
 import {
     CLASS_ADD,
     CLASS_EVENT_ADD,
-    CLASS_EVENT_GET,
     CLASS_INVITE
 } from'../types';
 
@@ -28,19 +27,9 @@ export function addEventClass(slot){
 
 }
 
-export function getEventClass(){
-    const request = axios.get('/api/classes/class-event')
-    .then(response => response.data)
-
-    return {
-        type: CLASS_EVENT_GET,
-        payload: request
-    }
-
-}
-
 export function inviteStudent({email}){
-    const request = axios.post('/api/classes/invite-student', email)
+    console.log(email)
+    const request = axios.post('/api/classes/invite-student', {email})
     .then(response => response.data)
 
     return {

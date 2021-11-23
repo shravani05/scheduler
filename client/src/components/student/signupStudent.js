@@ -37,7 +37,7 @@ class SignupStudent extends Component {
 
     componentDidUpdate(){
         if(this.state.success){
-            this.props.history.push('/admin');
+            this.props.history.push('/classes-dashboard');
         }
     }
 

@@ -8,5 +8,4 @@ export const TEACHER_AUTH = 'teacher_auth';
 
 export const CLASS_ADD = 'class_add';
 export const CLASS_EVENT_ADD = 'class_event_add';
-export const CLASS_EVENT_GET = 'class_event_get';
 export const CLASS_INVITE = 'class_invite';
