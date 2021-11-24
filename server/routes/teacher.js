@@ -4,10 +4,12 @@ const router = express.Router();
 /////MIDDLEWARE
 
 const {authTeacher} = require('../middleware/authTeacher');
+const {authStudent} = require('../middleware/authStudent');
 
 //////MODELS
 
 const { Teacher } = require('../models/teacher');
+const { Class } = require('../models/class');
 
 ////
 router.post('/signup', (req, res) => {
@@ -75,6 +77,68 @@ router.get('/auth', authTeacher, (req, res) => {
             lastname: req.teacher.lastname
         }
     })
+})
+
+router.post('/add-online-student', authStudent, (req, res) => {
+    const id = req.query.id;
+    Teacher.findByIdAndUpdate(id, {$push: {onlineStudents: req.student.email}}, {new: true}, (err, doc) => {
+        if(err) return res.status(400).send(err)
+        res.json({
+            success: true,
+            teacherData: doc
+        })
+    })
+    
+})
+
+router.post('/add-offline-student', authStudent, (req, res) => {
+    const id = req.query.id;
+    Teacher.findByIdAndUpdate(id, {$push: {offlineStudents: req.student.email}}, {new: true}, (err, doc) => {
+        if(err) return res.status(400).send(err)
+        res.json({
+            success: true,
+            teacherData: doc
+        })
+    })
+    
+})
+
+
+router.get('/get-online-student', authTeacher, (req, res) => {
+    const id = req.body.teacherId;
+    Teacher.findById(id, (err, doc) => {
+        if(err) return res.status(400).send(err)
+        console.log(doc)
+        res.json({
+            success: true,
+            studentsList: doc.onlineStudents ? doc.onlineStudents : []
+        })
+    })
+    
+})
+
+router.get('/get-offline-student', authTeacher, (req, res) => {
+    const id = req.body.teacherId;
+    Teacher.findById(id, (err, doc) => {
+        if(err) return res.status(400).send(err)
+        res.json({
+            success: true,
+            studentsList: doc.offlineStudents ? doc.offlineStudents : []
+        })
+    })
+    
+})
+
+router.get('/get-all-student', authTeacher, (req, res) => {
+    const id = req.body.teacherId;
+    Class.findOne({teacherId: id}, (err, doc) => {
+        if(err) return res.status(400).send(err)
+        res.json({
+            success: true,
+            studentsList: doc.students ? doc.students : []
+        })
+    })
+    
 })
 
 router.get('/logout', authTeacher, (req, res) => {

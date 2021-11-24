@@ -8,6 +8,8 @@ const {authStudent} = require('../middleware/authStudent');
 //////MODELS
 
 const { Student } = require('../models/student');
+const { Class } = require('../models/class');
+const { response } = require('express');
 
 ////
 router.post('/signup', (req, res) => {
@@ -66,6 +68,31 @@ router.get('/auth', authStudent, (req, res) => {
             name: req.student.name,
             lastname: req.student.lastname
         }
+    })
+})
+
+router.get('/subjects', authStudent, async (req, res) => {
+
+    const subject_ids =  req.student.subjects;
+    
+    const promises = subject_ids.map( async subId => { 
+        const sub = await Class.findById(subId);
+        return {
+            subject: sub
+        }
+        
+    })    
+
+    const results = await Promise.all(promises)
+    
+    let subjects = []
+    results.map(item => {
+        subjects.push(item.subject)
+    })
+
+    return res.status(200).json({
+        success:true,
+        subjects: subjects
     })
 })
 

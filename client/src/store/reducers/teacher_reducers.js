@@ -1,7 +1,13 @@
 import {
     TEACHER_LOGIN,
     TEACHER_SIGNUP,
-    TEACHER_AUTH
+    TEACHER_AUTH,
+    TEACHER_ONLINE_STUDENT,
+    TEACHER_OFFLINE_STUDENT,
+    TEACHER_ONLINE_STUDENT_GET,
+    TEACHER_OFFLINE_STUDENT_GET,
+    TEACHER_ALL_STUDENT_GET
+    
 } from'../types';
 
 export default function(state={}, action){
@@ -17,6 +23,21 @@ export default function(state={}, action){
                 auth: action.payload.auth ? action.payload.auth : false, 
                 teacherData: action.payload.teacherData ? action.payload.teacherData : false
             }
+
+        case TEACHER_ONLINE_STUDENT:
+            return {...state, auth: action.payload.success, teacherData: action.payload.teacherData}
+        
+        case TEACHER_OFFLINE_STUDENT:
+            return {...state, auth: action.payload.success, teacherData: action.payload.teacherData}
+
+        case TEACHER_ONLINE_STUDENT_GET:
+            return {...state, auth: action.payload.success, studentsList: action.payload.studentsList}
+
+        case TEACHER_OFFLINE_STUDENT_GET:
+            return {...state, auth: action.payload.success, studentsList: action.payload.studentsList}
+
+        case TEACHER_ALL_STUDENT_GET:
+            return {...state, auth: action.payload.success, studentsList: action.payload.studentsList}
         
         default: 
                 return state;

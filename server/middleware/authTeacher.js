@@ -6,7 +6,6 @@ let authTeacher = (req, res, next) => {
     Teacher.findByToken(token, (err, teacher) => {
         if(err) throw err;
         if(!teacher) return res.send(false);
-        console.log(req.body)
         req.token = token;
         req.body.teacherId = teacher._id;
         next();

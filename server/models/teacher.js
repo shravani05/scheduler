@@ -26,7 +26,13 @@ const teacherSchema = mongoose.Schema({
     },
     token:{
         type: String
-    }
+    },
+    onlineStudents:[{
+        type: String
+    }],
+    offlineStudents:[{
+        type: String
+    }]
 });
 
 teacherSchema.pre('save', function(next){

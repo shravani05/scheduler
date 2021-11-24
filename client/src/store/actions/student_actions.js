@@ -2,7 +2,8 @@ import axios from 'axios';
 import {
     STUDENT_LOGIN,
     STUDENT_SIGNUP,
-    STUDENT_AUTH
+    STUDENT_AUTH,
+    STUDENT_SUBJECTS
 } from'../types';
 
 
@@ -36,6 +37,17 @@ export function auth(){
     
     return{
         type: STUDENT_AUTH,
+        payload: request
+    }
+}
+
+export function getSubjects(){
+
+    const request = axios.get('/api/students/subjects')
+    .then(response => response.data)
+    
+    return{
+        type: STUDENT_SUBJECTS,
         payload: request
     }
 }

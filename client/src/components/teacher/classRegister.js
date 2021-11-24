@@ -21,7 +21,7 @@ class ClassRegister extends Component{
 
     componentDidUpdate(){
         if(this.state.success){
-            this.props.history.push('/teacher-dashboard');
+            this.props.history.push('/teacher-scheduler');
         }
     }
     

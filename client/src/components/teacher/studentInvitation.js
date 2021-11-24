@@ -37,8 +37,8 @@ class StudentInvitation extends Component{
 
     render(){
         return(
-            <>
-                Student Invitation:
+            <div className="container invite_container">
+                <h4>Student Invitation:</h4>
 
                 <Formik
                     initialValues={{email: ""}}
@@ -95,7 +95,8 @@ class StudentInvitation extends Component{
                         </form>
                     )}
                 </Formik>
-            </>
+                <Link to="/teacher-dashboard">Teacher Dashboard</Link>
+            </div>
         )
     }
 }

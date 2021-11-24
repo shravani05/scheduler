@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { ScheduleComponent, Day, Week, WorkWeek, Month, Agenda, Inject } from '@syncfusion/ej2-react-schedule';
-import { addEventClass, getEventClass } from '../../store/actions/class_actions';
+import { addEventClass } from '../../store/actions/class_actions';
 import { connect } from 'react-redux';
 
-class Dashboard extends Component{
+class ClassScheduler extends Component{
 
     state = {
         success: false
@@ -36,13 +36,13 @@ class Dashboard extends Component{
 
     render(){
         return(
-            <>
+            <div className="container dashboard_container">
                 <ScheduleComponent height='550px' ref={t => this.scheduleObj = t}  
                 dataBound={this.onDataBound.bind(this)} >
                     <Inject services={[Day, Week, WorkWeek, Month, Agenda]}/>
-                </ScheduleComponent>;
+                </ScheduleComponent>
                 <Link to="/invite-students">Go to Invite Students</Link>
-            </>
+            </div>
         )
     }
 }
@@ -53,4 +53,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps)(ClassScheduler);

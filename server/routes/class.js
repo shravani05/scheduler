@@ -72,5 +72,26 @@ router.post('/invite-student', authTeacher, (req, res) => {
     })
 });
 
+router.get('/class-event', (req, res) => {
+    Class.findById(req.query.id)
+        .exec((err, doc) => {
+        if(err) return res.status(400).send(err)
+
+        res.status(200).json({
+            classEvent: doc
+        })
+    })
+})
+
+router.get('/class-event-teacher-dashboard', authTeacher,(req, res) => {
+    Class.findOne({teacherId: req.body.teacherId})
+        .exec((err, doc) => {
+        if(err) return res.status(400).send(err)
+
+        res.status(200).json({
+            classEvent: doc
+        })
+    })
+})
 
 module.exports = router;
