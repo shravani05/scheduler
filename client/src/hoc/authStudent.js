@@ -23,7 +23,7 @@ export default function(ComposedClass, reload){
                 }else{
                     if(reload === false)
                     {
-                        this.props.history.push('/admin')
+                        this.props.history.push('/classes-dashboard')
                     }
                 }
             })

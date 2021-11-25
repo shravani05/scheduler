@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { connect } from 'react-redux';
 import { loginTeacher } from '../../store/actions/teacher_actions';
 import { Link } from "react-router-dom";
+import Header from '../Headers/header';
 
 const LoginSchema = Yup.object().shape({
     password: Yup.string()
@@ -40,7 +41,9 @@ class LoginTeacher extends Component {
     render(){
         console.log(this.props)
         return(
-            <div className="container form_container">
+            <>
+            <Header/>
+            <div className="form_container">
                 <h1>Welcome back!</h1>
                 <hr/>
                 <h4>Login here:</h4>
@@ -119,6 +122,7 @@ class LoginTeacher extends Component {
                     )}
                 </Formik>
             </div>
+            </>
         )
     }
 }

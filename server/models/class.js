@@ -28,7 +28,9 @@ const classSchema = mongoose.Schema({
         type: String
     },
     students: [{
-        type: String
+        name: {type: String},
+        lastname: {type: String},
+        email: {type: String}
     }]
 });
 

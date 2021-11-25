@@ -15,12 +15,22 @@ import Dashboard from './components/teacher/teacherDashboard';
 import viewSchedule from './components/teacher/viewSchedule';
 import AuthStudent from './hoc/authStudent';
 import AuthTeacher from './hoc/authTeacher';
+import Header from './components/Headers/header';
+import Footer from './components/footer';
+import About from './components/about';
+import OnlineStudents from './components/teacher/onlineStudents';
+import OfflineStudents from './components/teacher/offlineStudents';
+import AllStudents from './components/teacher/allStudents';
+import LogoutStudent from './components/student/logoutStudent';
 
 class RoutesComp extends Component {
   render(){
     return(
       <BrowserRouter>
           <Switch>
+              <Route path="/teacher-dashboard-all" component = {AuthTeacher(AllStudents, true)}/>
+              <Route path="/teacher-dashboard-offline" component = {AuthTeacher(OfflineStudents, true)}/>
+              <Route path="/teacher-dashboard-online" component = {AuthTeacher(OnlineStudents, true)}/>
               <Route path="/class/:classId" component = {AuthStudent(Class, true)}/>
               <Route path = "/view-class-teacher" component = {AuthTeacher(viewSchedule, true)}/>
               <Route path = "/teacher-dashboard" component = {AuthTeacher(Dashboard, true)}/>
@@ -32,8 +42,11 @@ class RoutesComp extends Component {
               <Route path = "/student-signup" component = {AuthStudent(SignupStudent, false)}/>
               <Route path = "/student-login" component = {AuthStudent(LoginStudent, false)}/>
               <Route path = "/classes-dashboard" component = {AuthStudent(ClassesDashboard, true)}/>
+              <Route path = "/logout-student" component = {AuthStudent(LogoutStudent, true)}/>
+              <Route path="/about" component = {About}/>
               <Route path = "/" component = {Home}/>
           </Switch>
+          <Footer/>
         </BrowserRouter>
     );
   }

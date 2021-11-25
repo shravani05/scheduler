@@ -58,8 +58,9 @@ router.post('/invite-student', authTeacher, (req, res) => {
                 if(err) return res.status(400).send(err)
             })
 
+            let newStudent = {name: student.name, lastname: student.lastname, email: student.email}
             Class.updateOne({teacherId: req.body.teacherId}, 
-                {$push: {students: req.body.email}})
+                {$push: {students: newStudent}})
                 .exec((err, doc) => {
                 if(err) return res.status(400).send(err)
                 res.status(200).json({

@@ -28,10 +28,14 @@ const teacherSchema = mongoose.Schema({
         type: String
     },
     onlineStudents:[{
-        type: String
+        name: {type: String},
+        lastname: {type: String},
+        email: {type: String}
     }],
     offlineStudents:[{
-        type: String
+        name: {type: String},
+        lastname: {type: String},
+        email: {type: String}
     }]
 });
 

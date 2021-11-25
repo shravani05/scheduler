@@ -3,7 +3,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { connect } from 'react-redux';
 import { addClass } from '../../store/actions/class_actions';
-import { Link } from "react-router-dom";
+import Header from '../Headers/header';
 
 const classSchema = Yup.object().shape({
     classname: Yup.string()
@@ -27,7 +27,10 @@ class ClassRegister extends Component{
     
     render(){
         return(
-            <div className="container class_register">
+            <>
+            <Header/>
+            <div className="form_container">
+                <h2>Enter Class Details:</h2>
                 <Formik
                     initialValues={{classname: "", availableSlots: ""}}
                     validationSchema={classSchema}
@@ -50,7 +53,7 @@ class ClassRegister extends Component{
                         <form onSubmit={handleSubmit}>
                             <div className="row">
                                 <div className="twelve columns">
-                                    <div>Class Name:</div>
+                                    <div className="label-form">Class Name:</div>
                                     <input
                                         type="text"
                                         name="classname"
@@ -68,7 +71,7 @@ class ClassRegister extends Component{
 
                             <div className="row">
                                 <div className="twelve columns">
-                                    <div>Available slots:</div>
+                                    <div className="label-form">Available slots:</div>
                                     <input
                                         type="text"
                                         name="availableSlots"
@@ -85,13 +88,14 @@ class ClassRegister extends Component{
                             </div>
 
                             <button type="submit">
-                                submit
+                                SUBMIT
                             </button>
 
                         </form>
                     )}
                 </Formik>
             </div>
+            </>
         )
     }
 }

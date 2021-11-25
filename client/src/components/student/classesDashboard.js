@@ -7,6 +7,7 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import '@coreui/coreui/dist/css/coreui.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CCard, CCardImage, CCardBody, CCardTitle, CCardText, CButton } from '@coreui/react';
+import HeaderDashboardStudent from '../Headers/headerDashboardStudent';
 
 class ClassesDashboard extends Component{
 
@@ -35,9 +36,16 @@ class ClassesDashboard extends Component{
                     <CCard className="classes_cards" style={{ width: '28rem' }}>
                     <CCardImage orientation="top" src="/images/classes.png" />
                     <CCardBody>
-                    <CCardTitle>{item.classname}</CCardTitle>
+                    <CCardTitle className="class-title">{item.classname}</CCardTitle>
                     </CCardBody>
                     </CCard>
+
+                    {/* <Card style={{ width: '28rem' }}>
+                    <Card.Img variant="top" src="/images/classes.png" />
+                    <Card.Body>
+                        <Card.Title>{item.classname}</Card.Title>
+                    </Card.Body>
+                    </Card> */}
 
                 </Link>
               ))
@@ -49,6 +57,8 @@ class ClassesDashboard extends Component{
         console.log(this.state.success)
         console.log(this.state.subjects)
         return(
+            <>
+            <HeaderDashboardStudent/>
             <div className="container class_container">
                 {
                     this.state.success ?
@@ -62,6 +72,7 @@ class ClassesDashboard extends Component{
                     </div>
                 }
             </div>
+            </>
         )
     }
 }

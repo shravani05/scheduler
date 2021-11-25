@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { ScheduleComponent, Day, Week, WorkWeek, Month, Agenda, Inject } from '@syncfusion/ej2-react-schedule';
 import { connect } from 'react-redux';
 import { getEventClassForTeacher } from '../../store/actions/class_actions';
+import Loader from "react-loader-spinner";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import HeaderLogoutTeacher from '../Headers/headerLogoutTeacher';
 
 
 class ViewSchedule extends Component{
@@ -13,12 +16,14 @@ class ViewSchedule extends Component{
             EndTime: "",
             RecurrenceRule: "",
             IsReadonly: true
-        }]
+        }],
+        success: false
     }
 
     componentDidMount(){
         this.props.dispatch(getEventClassForTeacher()).then(response => {
             let event = response.payload.classEvent;
+            event ? 
             this.setState({
                 data:[{
                     Subject: event.slotSubject,
@@ -26,8 +31,10 @@ class ViewSchedule extends Component{
                     EndTime: event.slotEndTime,
                     RecurrenceRule: event.slotRecurrenceRelation,
                     IsReadonly: true
-                }]
-            })
+                }],
+                success: true
+            }) : 
+            this.setState({success: false})
         })
     }
 
@@ -36,13 +43,27 @@ class ViewSchedule extends Component{
     render(){
         console.log(this.props.match.params.classId)
         return(
-            <div className="container">
-                <ScheduleComponent height='550px' eventSettings={{ dataSource: this.state.data }}
-                IsReadonly={true}>
-                    <Inject services={[Day, Week, WorkWeek, Month, Agenda]}/>
-                </ScheduleComponent>
+            <>
+            <HeaderLogoutTeacher/>
+            <div className="container view-scheduler">
+                {
+                    this.state.success ?
+                    <>
+                    <h1>Class Schedule: </h1>
+                    <ScheduleComponent height='550px' eventSettings={{ dataSource: this.state.data }}
+                    IsReadonly={true}>
+                        <Inject services={[Day, Week, WorkWeek, Month, Agenda]}/>
+                    </ScheduleComponent>
+                    </>
+                :
+                    <div className="loader">
+                    <Loader type="ThreeDots" color="#00BFFF" height={80} width={80} />
+                     </div>
+                }
+                
 
             </div>
+            </>
         )
     }
 }

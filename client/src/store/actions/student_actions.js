@@ -3,7 +3,8 @@ import {
     STUDENT_LOGIN,
     STUDENT_SIGNUP,
     STUDENT_AUTH,
-    STUDENT_SUBJECTS
+    STUDENT_SUBJECTS,
+    STUDENT_LOGOUT
 } from'../types';
 
 
@@ -48,6 +49,17 @@ export function getSubjects(){
     
     return{
         type: STUDENT_SUBJECTS,
+        payload: request
+    }
+}
+
+export function logoutStudent(){
+
+    const request = axios.get('/api/students/logout')
+    .then(response => {return null})
+    
+    return{
+        type: STUDENT_LOGOUT,
         payload: request
     }
 }

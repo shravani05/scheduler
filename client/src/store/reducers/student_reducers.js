@@ -2,7 +2,8 @@ import {
     STUDENT_LOGIN,
     STUDENT_SIGNUP,
     STUDENT_AUTH,
-    STUDENT_SUBJECTS
+    STUDENT_SUBJECTS,
+    STUDENT_LOGOUT
 } from'../types';
 
 export default function(state={}, action){
@@ -21,6 +22,9 @@ export default function(state={}, action){
 
         case STUDENT_SUBJECTS:
             return {...state, auth: action.payload.success, subjects: action.payload.subjects}
+
+        case STUDENT_LOGOUT:
+            return {...state, auth: action.payload, studentData: false}
         
         default: 
                 return state;

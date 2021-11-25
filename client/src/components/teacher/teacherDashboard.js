@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAllStudent, getOfflineStudent, getOnlineStudent } from '../../store/actions/teacher_actions';
-
+import HeaderDashboardTeacher from '../Headers/headerDashboardTeacher';
+import Image from 'react-bootstrap/Image';;
 
 class Dashboard extends Component{
 
@@ -38,12 +39,13 @@ class Dashboard extends Component{
     render(){
         console.log(this.state)
         return(
-            <div className="container">
-                Dashboard
-                <button onClick={this.getOnline}>Get Online Students</button>
-                <button onClick={this.getOffline}>Get Offline Students</button>
-                <button onClick={this.getAll}>Get All Students</button>
+            <>
+            <HeaderDashboardTeacher/>
+            <div className="teacher-dashboard">
+                <Image src="./images/teacher-dashboard.png" fluid className = "img"/>
+                <h1>Welcome to the dashboard. Explore above options to see student roster and class details.</h1>
             </div>
+            </>
         )
     }
 }

@@ -3,6 +3,7 @@ import { ScheduleComponent, Day, Week, WorkWeek, Month, Agenda, Inject } from '@
 import { connect } from 'react-redux';
 import { getEventClass } from '../../store/actions/class_actions';
 import { addOfflineStudent, addOnlineStudent } from '../../store/actions/teacher_actions';
+import HeaderLogoutStudent from '../Headers/headerLogoutStudent';
 
 class Class extends Component{
 
@@ -55,7 +56,10 @@ class Class extends Component{
     render(){
         console.log(this.props.match.params.classId)
         return(
-            <div className="container">
+            <>
+            <HeaderLogoutStudent/>
+            <div className="container class_book_container">
+                <h2>Class Schedule:</h2>
                 <ScheduleComponent height='550px' eventSettings={{ dataSource: this.state.data }}
                 IsReadonly={true}>
                     <Inject services={[Day, Week, WorkWeek, Month, Agenda]}/>
@@ -73,6 +77,7 @@ class Class extends Component{
                     : null
                 }
             </div>
+            </>
         )
     }
 }

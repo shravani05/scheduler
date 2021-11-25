@@ -18,10 +18,6 @@ router.post('/signup', (req, res) => {
 
     teacher.save((err, doc) => {
         if(err) return res.json({ success: false,  teacherData: false});
-        // res.status(200).json({
-        //     success: true,
-        //     teacherData: doc
-        // })
         const teacher = doc;
         teacher.generateToken((err, doc) => {
             if(err) return res.status(400).send(err);
@@ -81,7 +77,9 @@ router.get('/auth', authTeacher, (req, res) => {
 
 router.post('/add-online-student', authStudent, (req, res) => {
     const id = req.query.id;
-    Teacher.findByIdAndUpdate(id, {$push: {onlineStudents: req.student.email}}, {new: true}, (err, doc) => {
+    let newStudent = {name: req.student.name, lastname: req.student.lastname, email: req.student.email}
+    Teacher.findByIdAndUpdate(id, {$push: {onlineStudents: newStudent}}, 
+        {new: true}, (err, doc) => {
         if(err) return res.status(400).send(err)
         res.json({
             success: true,
@@ -93,7 +91,8 @@ router.post('/add-online-student', authStudent, (req, res) => {
 
 router.post('/add-offline-student', authStudent, (req, res) => {
     const id = req.query.id;
-    Teacher.findByIdAndUpdate(id, {$push: {offlineStudents: req.student.email}}, {new: true}, (err, doc) => {
+    let newStudent = {name: req.student.name, lastname: req.student.lastname, email: req.student.email}
+    Teacher.findByIdAndUpdate(id, {$push: {offlineStudents: newStudent}}, {new: true}, (err, doc) => {
         if(err) return res.status(400).send(err)
         res.json({
             success: true,

@@ -6,8 +6,8 @@ import {
     TEACHER_OFFLINE_STUDENT,
     TEACHER_ONLINE_STUDENT_GET,
     TEACHER_OFFLINE_STUDENT_GET,
-    TEACHER_ALL_STUDENT_GET
-    
+    TEACHER_ALL_STUDENT_GET,
+    TEACHER_LOGOUT
 } from'../types';
 
 export default function(state={}, action){
@@ -38,6 +38,9 @@ export default function(state={}, action){
 
         case TEACHER_ALL_STUDENT_GET:
             return {...state, auth: action.payload.success, studentsList: action.payload.studentsList}
+
+        case TEACHER_LOGOUT:
+            return {...state, auth: action.payload, teacherData: false}
         
         default: 
                 return state;

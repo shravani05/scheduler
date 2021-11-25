@@ -18,11 +18,18 @@ router.post('/signup', (req, res) => {
 
     student.save((err, doc) => {
         if(err) return res.json({ success: false,  studentData: false});
-        res.status(200).json({
-            success: true,
-            studentData: doc
+        const student = doc
+        student.generateToken((err, doc) => {
+            if(err) return res.status(400).send(err);
+            res.cookie('auth', student.token).json({
+                success: true,
+                studentData: doc
+            })
         })
-
+        // res.status(200).json({
+        //     success: true,
+        //     studentData: doc
+        // })
     })
 })
 

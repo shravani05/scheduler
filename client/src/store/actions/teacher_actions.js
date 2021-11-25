@@ -7,7 +7,8 @@ import {
     TEACHER_OFFLINE_STUDENT,
     TEACHER_ONLINE_STUDENT_GET,
     TEACHER_OFFLINE_STUDENT_GET,
-    TEACHER_ALL_STUDENT_GET
+    TEACHER_ALL_STUDENT_GET,
+    TEACHER_LOGOUT
 } from'../types';
 
 
@@ -91,6 +92,17 @@ export function getAllStudent(){
 
     return{
         type: TEACHER_ALL_STUDENT_GET,
+        payload: request
+    }
+}
+
+export function logoutTeacher(){
+
+    const request = axios.get('/api/teachers/logout')
+    .then(response => {return null})
+    
+    return{
+        type: TEACHER_LOGOUT,
         payload: request
     }
 }

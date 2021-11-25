@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { connect } from 'react-redux';
 import { signupStudent } from '../../store/actions/student_actions';
 import { Link } from "react-router-dom";
+import Header from '../Headers/header';
 
 const SignupSchema = Yup.object().shape({
     name: Yup.string()
@@ -43,7 +44,9 @@ class SignupStudent extends Component {
 
     render(){
         return(
-            <div className="container form_container">
+            <>
+            <Header/>
+            <div className="form_container">
                 <h1>Welcome!</h1>
                 <hr/>
                 <h4>Sign up here:</h4>
@@ -156,6 +159,7 @@ class SignupStudent extends Component {
                     )}
                 </Formik>
             </div>
+            </>
         )
     }
 }

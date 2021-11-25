@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { connect } from 'react-redux';
-import { inviteStudent } from '../../store/actions/class_actions'
+import { inviteStudent } from '../../store/actions/class_actions';
+import HeaderLogoutTeacher from '../Headers/headerLogoutTeacher';
+
 
 const InviteSchema = Yup.object().shape({
     email: Yup.string()
@@ -31,27 +33,33 @@ class StudentInvitation extends Component{
 
     componentDidUpdate(){
         if(this.state.success){
-           console.log("Success")
+        //    alert("Invited Successfully.")
         }
     }
 
     render(){
         return(
-            <div className="container invite_container">
+            <>
+            <HeaderLogoutTeacher/>
+            <div className="form_container invite_container">
                 <h4>Student Invitation:</h4>
 
                 <Formik
                     initialValues={{email: ""}}
                     validationSchema={InviteSchema}
-                    onSubmit = {values => {
+                    onSubmit = {(values, {resetForm}) => {
                         this.props.dispatch(inviteStudent(values)).then(response => {
                             console.log(values.email)
                             if(!this.props.classSub.auth){
-                                this.setState({
-                                    validation: true
-                                })
+                                // this.setState({
+                                //     validation: true
+                                // })
+                                alert("Error, student not found. Please check the email id again.")
+                            }else{
+                                alert("Invited Successfully.")
                             }
                         })
+                        resetForm({})
                     }}
                 >
                     {({
@@ -64,7 +72,7 @@ class StudentInvitation extends Component{
                     }) => (
                         <form onSubmit={handleSubmit}>
                             <div className="row">
-                                <div>Enter student email to invite: </div>
+                                <div className="label-form">Enter student email to invite: </div>
                                 <div className="twelve columns">
                                     <input
                                         type="email"
@@ -82,21 +90,23 @@ class StudentInvitation extends Component{
                             </div>
 
                             <button type="submit">
-                                Invite
+                                INVITE
                             </button>
 
-                            {
+                            {/* {
                                 this.state.validation ?
+                                
                                 <div className="error_label">
                                     Error, student not found. Please check the email id again.
                                 </div>
                                 : null
-                            }
+                            } */}
                         </form>
                     )}
                 </Formik>
                 <Link to="/teacher-dashboard">Teacher Dashboard</Link>
             </div>
+            </>
         )
     }
 }
