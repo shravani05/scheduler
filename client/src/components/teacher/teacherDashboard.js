@@ -37,7 +37,6 @@ class Dashboard extends Component{
     }
 
     render(){
-        console.log(this.state)
         return(
             <>
             <HeaderDashboardTeacher/>

@@ -141,7 +141,7 @@ class SignupStudent extends Component {
                             </div>
 
                             <button type="submit">
-                                Sign up
+                                SIGN UP
                             </button>
 
                             <p className="transfer-text">

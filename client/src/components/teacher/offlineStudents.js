@@ -23,12 +23,12 @@ class OfflineStudents extends Component{
     }
 
     render(){
-        console.log(this.state.offlineStudents)
         return(
             <>
             <HeaderLogoutTeacher/>
+            <div className="table_conatiner">
             <h1>Offline Students</h1>
-            <div>
+            <div className="table">
               
                 {
                     this.state.success ?
@@ -65,6 +65,7 @@ class OfflineStudents extends Component{
                     </div>
                 }
                 
+            </div>
             </div>
             </>
         )

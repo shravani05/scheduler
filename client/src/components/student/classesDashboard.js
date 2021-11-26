@@ -6,7 +6,7 @@ import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import '@coreui/coreui/dist/css/coreui.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { CCard, CCardImage, CCardBody, CCardTitle, CCardText, CButton } from '@coreui/react';
+import { CCard, CCardImage, CCardBody, CCardTitle } from '@coreui/react';
 import HeaderDashboardStudent from '../Headers/headerDashboardStudent';
 
 class ClassesDashboard extends Component{
@@ -39,14 +39,6 @@ class ClassesDashboard extends Component{
                     <CCardTitle className="class-title">{item.classname}</CCardTitle>
                     </CCardBody>
                     </CCard>
-
-                    {/* <Card style={{ width: '28rem' }}>
-                    <Card.Img variant="top" src="/images/classes.png" />
-                    <Card.Body>
-                        <Card.Title>{item.classname}</Card.Title>
-                    </Card.Body>
-                    </Card> */}
-
                 </Link>
               ))
         : null

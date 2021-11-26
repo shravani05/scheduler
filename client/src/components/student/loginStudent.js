@@ -104,7 +104,7 @@ class LoginStudent extends Component {
                             </div>
 
                             <button type="submit">
-                                Login
+                                LOGIN
                             </button>
 
                             <p className="transfer-text">

@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { logoutStudent } from '../../store/actions/student_actions';
+import { logoutTeacher } from '../../store/actions/teacher_actions';
 import Header from '../Headers/header';
 
-const LogoutStudent = (props) => {
+const LogoutTeacher = (props) => {
 
-    const logout = useSelector(state => state.student);
+    const logout = useSelector(state => state.teacher);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(logoutStudent())
+        dispatch(logoutTeacher())
     },[dispatch]);
 
     useEffect(() => {
@@ -33,4 +33,4 @@ const LogoutStudent = (props) => {
 
 }
 
-export default LogoutStudent;
+export default LogoutTeacher;

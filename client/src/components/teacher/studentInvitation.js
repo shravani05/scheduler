@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { connect } from 'react-redux';
@@ -31,12 +30,6 @@ class StudentInvitation extends Component{
         return null;
     }
 
-    componentDidUpdate(){
-        if(this.state.success){
-        //    alert("Invited Successfully.")
-        }
-    }
-
     render(){
         return(
             <>
@@ -48,12 +41,8 @@ class StudentInvitation extends Component{
                     initialValues={{email: ""}}
                     validationSchema={InviteSchema}
                     onSubmit = {(values, {resetForm}) => {
-                        this.props.dispatch(inviteStudent(values)).then(response => {
-                            console.log(values.email)
+                        this.props.dispatch(inviteStudent(values)).then(response => {                    
                             if(!this.props.classSub.auth){
-                                // this.setState({
-                                //     validation: true
-                                // })
                                 alert("Error, student not found. Please check the email id again.")
                             }else{
                                 alert("Invited Successfully.")
@@ -92,26 +81,15 @@ class StudentInvitation extends Component{
                             <button type="submit">
                                 INVITE
                             </button>
-
-                            {/* {
-                                this.state.validation ?
-                                
-                                <div className="error_label">
-                                    Error, student not found. Please check the email id again.
-                                </div>
-                                : null
-                            } */}
                         </form>
                     )}
                 </Formik>
-                <Link to="/teacher-dashboard">Teacher Dashboard</Link>
             </div>
             </>
         )
     }
 }
 function mapStateToProps(state){
-    console.log(state)
     return{
         classSub: state.classSub
     }

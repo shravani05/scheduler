@@ -37,7 +37,6 @@ class Class extends Component{
 
     onOnlineClick = () => {
         this.props.dispatch(addOnlineStudent(this.state.teacherId)).then(response => {
-            console.log("Online added")
             this.setState({
                 disabled: true
             })
@@ -46,7 +45,6 @@ class Class extends Component{
 
     onOfflineClick = () => {
         this.props.dispatch(addOfflineStudent(this.state.teacherId)).then(response => {
-            console.log("Offline added")
             this.setState({
                 disabled: true
             })
@@ -61,7 +59,7 @@ class Class extends Component{
             <div className="container class_book_container">
                 <h2>Class Schedule:</h2>
                 <ScheduleComponent height='550px' eventSettings={{ dataSource: this.state.data }}
-                IsReadonly={true}>
+                IsReadonly={true} currentView='Month'>
                     <Inject services={[Day, Week, WorkWeek, Month, Agenda]}/>
                 </ScheduleComponent>
 

@@ -8,7 +8,6 @@ import {
 } from'../types';
 
 
-/*=========== STUDENT =============*/
 export function signupStudent({name, lastname, email, password}){
 
     const request = axios.post('/api/students/signup', {name, lastname, email, password})

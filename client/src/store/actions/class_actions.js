@@ -7,6 +7,7 @@ import {
     CLASS_EVENT_GET_TEACHER_DASHBOARD
 } from'../types';
 
+
 export function addClass(classSub){
     const request = axios.post('/api/classes/class-register', classSub)
     .then(response => response.data)
@@ -30,7 +31,6 @@ export function addEventClass(slot){
 }
 
 export function inviteStudent({email}){
-    console.log(email)
     const request = axios.post('/api/classes/invite-student', {email})
     .then(response => response.data)
 

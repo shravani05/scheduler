@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-// const config = require('./../config/config').get(process.env.NODE_ENV);
 
 const classSchema = mongoose.Schema({
     classname:{

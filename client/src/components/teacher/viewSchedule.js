@@ -41,7 +41,6 @@ class ViewSchedule extends Component{
     
 
     render(){
-        console.log(this.props.match.params.classId)
         return(
             <>
             <HeaderLogoutTeacher/>
@@ -51,7 +50,7 @@ class ViewSchedule extends Component{
                     <>
                     <h1>Class Schedule: </h1>
                     <ScheduleComponent height='550px' eventSettings={{ dataSource: this.state.data }}
-                    IsReadonly={true}>
+                    IsReadonly={true} currentView='Month'>
                         <Inject services={[Day, Week, WorkWeek, Month, Agenda]}/>
                     </ScheduleComponent>
                     </>

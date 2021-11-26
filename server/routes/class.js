@@ -51,7 +51,6 @@ router.post('/invite-student', authTeacher, (req, res) => {
         Class.findOne({teacherId: req.cookies.teacherId})
         .exec((err, doc) => {
             if(err) return res.status(400).send(err)
-            console.log(doc)
             const classID = doc._id;
 
             Student.updateOne({'email':req.body.email}, {$push: {subjects: classID}}).exec((err, doc) => {

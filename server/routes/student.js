@@ -26,10 +26,6 @@ router.post('/signup', (req, res) => {
                 studentData: doc
             })
         })
-        // res.status(200).json({
-        //     success: true,
-        //     studentData: doc
-        // })
     })
 })
 

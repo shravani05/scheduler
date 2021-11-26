@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-// const config = require('./../config/config').get(process.env.NODE_ENV);
 const SALT_I = 10;
+require('dotenv').config();
 
 const teacherSchema = mongoose.Schema({
     email:{
@@ -91,7 +91,7 @@ teacherSchema.statics.findByToken = function(token, cb){
 teacherSchema.methods.deleteToken = function(token, cb){
     var teacher = this;
 
-    student.updateOne({$unset:{token:1}}, function(err, teacher){
+    teacher.updateOne({$unset:{token:1}}, function(err, teacher){
         if(err) return cb(err);
         cb(null, teacher);
     })

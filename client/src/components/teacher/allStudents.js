@@ -23,7 +23,6 @@ class AllStudents extends Component{
     }
 
     render(){
-        console.log(this.state.allStudents)
         return(
             <>
             <HeaderLogoutTeacher/>

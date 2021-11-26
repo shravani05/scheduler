@@ -23,7 +23,6 @@ class OnlineStudents extends Component{
     }
 
     render(){
-        console.log(this.state.onlineStudents)
         return(
             <>
             <HeaderLogoutTeacher/>

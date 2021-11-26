@@ -107,7 +107,6 @@ router.get('/get-online-student', authTeacher, (req, res) => {
     const id = req.body.teacherId;
     Teacher.findById(id, (err, doc) => {
         if(err) return res.status(400).send(err)
-        console.log(doc)
         res.json({
             success: true,
             studentsList: doc.onlineStudents ? doc.onlineStudents : []
