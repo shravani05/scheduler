@@ -48,7 +48,7 @@ router.post('/invite-student', authTeacher, (req, res) => {
             message: 'Auth failed, email not found'
         });
 
-        Class.findOne({teacherId: req.cookies.teacherId})
+        Class.findOne({teacherId: req.body.teacherId})
         .exec((err, doc) => {
             if(err) return res.status(400).send(err)
             const classID = doc._id;
