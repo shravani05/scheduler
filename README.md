@@ -60,5 +60,9 @@ MONGO_URI = "mongodb+srv://admin:testing123@cluster0.8qyyd.mongodb.net/myFirstDa
   
 -----
 
+### Video Demo
+----
+You can view the video demo here: https://drive.google.com/file/d/1Q9R1IHiP1GtOuywOEJSHMfB2dSz4Qmrr/view?usp=sharing
+
 
 (Here is the link to the deployed application: https://new-normal-scheduler-app.herokuapp.com/)
