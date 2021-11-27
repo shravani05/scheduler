@@ -43,6 +43,9 @@ You can login as student or teacher.
      
   ### To run the application on localhost:
   ____
+  
+  The teachstack used is ReactJS, Redux, NodeJS, ExpressJS and MongoDB.
+  
     scheduler> npm install .
     scheduler> cd client
     scheduler\client> npm install .
